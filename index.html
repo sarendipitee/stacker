@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b101b">
+  <meta name="description" content="Serial multi-effect plugin with per-stage parameter distribution curves and shared modulation. Free for macOS, Windows, and Linux.">
+  <title>Stacker — Serial Multi-Effect Plugin</title>
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=2">
+  <script src="app.js?v=2" defer></script>
+  <script src="fog.js" type="module"></script>
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true"><canvas id="fog-canvas"></canvas></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="brand" href="#" aria-label="Stacker home"><span class="wordmark">S T A C K E R</span></a>
+    <nav aria-label="Main navigation"><a href="#demos">Audio Demos</a><a href="#workflow">Workflow</a><a href="#effects">22 Effects</a></nav>
+    <a class="header-link" href="#download">Free Download <span aria-hidden="true">↓</span></a>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-intro">
+        <p class="eyebrow">OPEN AUDIO PLUGIN · VST3 · AU · CLAP · LV2</p>
+        <h1 id="hero-title">Serial stacks.<br>Distributed values.<br><em>Zero routing mess.</em></h1>
+        <p class="hero-tagline">Repeat any effect up to 32 times in series. Draw continuous Bézier curves across the instances instead of hand-wiring dozens of channels in your DAW.</p>
+        <div class="hero-actions">
+          <a class="primary-button" href="#download">Download Stacker v0.3.0 <span aria-hidden="true">↓</span></a>
+          <div class="platform-shortcuts" aria-label="Direct platform downloads">
+            <a href="https://github.com/sarendipitee/stacker/releases/latest/download/Stacker-macOS-arm64.pkg">macOS (arm64)</a>
+            <a href="https://github.com/sarendipitee/stacker/releases/latest/download/Stacker-Windows-x86_64.exe">Windows (x64)</a>
+            <a href="https://github.com/sarendipitee/stacker/releases/latest/download/Stacker-Linux-x86_64.tar.gz">Linux (x64)</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-product" id="screencast-container">
+        <div class="product-view screencast-frame">
+          <button class="image-button" aria-label="Enlarge plugin interface screenshot">
+            <img id="editor-image" src="assets/distribution-detail-3x.png" alt="Stacker plugin interface" width="3840" height="2400" fetchpriority="high">
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audio Demos -->
+    <section class="demos-section section wrap" id="demos">
+      <div class="demo-list">
+        <article class="demo-row" data-demo="comb">
+          <div class="demo-info">
+            <span class="stack-badge">15× Comb</span>
+            <h3>Harmonic Resonator</h3>
+            <p>15 tuned resonant peaks across a stereo pluck.</p>
+          </div>
+          <div class="demo-player">
+            <button class="play-btn" aria-label="Play 15x Comb demo">
+              <span class="play-icon" aria-hidden="true">▶</span>
+            </button>
+            <div class="toggle-switch-container">
+              <button class="toggle-mode-btn" data-mode="dry" aria-pressed="false">Dry</button>
+              <button class="toggle-mode-btn active" data-mode="wet" aria-pressed="true">Wet</button>
+            </div>
+            <div class="playback-progress">
+              <div class="progress-bar-fill"></div>
+            </div>
+            <span class="time-readout">0:00</span>
+          </div>
+        </article>
+
+        <article class="demo-row" data-demo="allpass">
+          <div class="demo-info">
+            <span class="stack-badge">16× All-Pass</span>
+            <h3>Transient Dispersion</h3>
+            <p>16 phase-delay stages smearing an impulse.</p>
+          </div>
+          <div class="demo-player">
+            <button class="play-btn" aria-label="Play 16x All-Pass demo">
+              <span class="play-icon" aria-hidden="true">▶</span>
+            </button>
+            <div class="toggle-switch-container">
+              <button class="toggle-mode-btn" data-mode="dry" aria-pressed="false">Dry</button>
+              <button class="toggle-mode-btn active" data-mode="wet" aria-pressed="true">Wet</button>
+            </div>
+            <div class="playback-progress">
+              <div class="progress-bar-fill"></div>
+            </div>
+            <span class="time-readout">0:00</span>
+          </div>
+        </article>
+
+        <article class="demo-row" data-demo="multiband">
+          <div class="demo-info">
+            <span class="stack-badge">20× Multiband</span>
+            <h3>Extreme Dynamics</h3>
+            <p>Cascaded upward and downward compression.</p>
+          </div>
+          <div class="demo-player">
+            <button class="play-btn" aria-label="Play 20x Multiband demo">
+              <span class="play-icon" aria-hidden="true">▶</span>
+            </button>
+            <div class="toggle-switch-container">
+              <button class="toggle-mode-btn" data-mode="dry" aria-pressed="false">Dry</button>
+              <button class="toggle-mode-btn active" data-mode="wet" aria-pressed="true">Wet</button>
+            </div>
+            <div class="playback-progress">
+              <div class="progress-bar-fill"></div>
+            </div>
+            <span class="time-readout">0:00</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Workflow and Architectural Highlights -->
+    <section class="features section wrap" id="workflow">
+      <div class="features-grid">
+        <article class="feature-card">
+          <button class="feature-shot-btn" data-enlarge="assets/dist-curve-demo.png" aria-label="Enlarge distribution curve screenshot">
+            <img src="assets/dist-curve-demo.png" alt="Distribution curve editor showing Bézier anchors across stages" loading="lazy">
+          </button>
+          <div class="feature-body">
+            <h3>Per-Stage Distribution Curves</h3>
+            <p>Every parameter has a curve editor. Plot Bézier anchors, S-curves, or seeded random values across up to 32 repetitions without opening individual plugin instances.</p>
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <button class="feature-shot-btn" data-enlarge="assets/dist-scale-mod.png" aria-label="Enlarge modulated distribution screenshot">
+            <img src="assets/dist-scale-mod.png" alt="Distribution editor showing Scale modulated by LFO" loading="lazy">
+          </button>
+          <div class="feature-body">
+            <h3>Modulate the Spread Itself</h3>
+            <p>Drop an LFO, Envelope Follower, or Macro directly onto the distribution Scale knob to expand, narrow, or invert the entire multi-stage parameter spread dynamically.</p>
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <button class="feature-shot-btn" data-enlarge="assets/serial-chain-multi.png" aria-label="Enlarge multi-stack serial chain screenshot">
+            <img src="assets/serial-chain-multi.png" alt="Multi-stack serial chain showing comb, allpass, and chorus stages" loading="lazy">
+          </button>
+          <div class="feature-body">
+            <h3>Serial Chains &amp; True DSP History</h3>
+            <p>Chain different effect stacks in series. Delay buffers, reverbs, and pitch shifters maintain separate continuous state per repetition for real acoustic density.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 22 Built-in Effects Catalog -->
+    <section class="effects section" id="effects" aria-labelledby="effects-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">BUILT-IN DSP MODULES</p>
+            <h2 id="effects-title">22 Effects ready to stack.</h2>
+          </div>
+          <p>Serial chaining with independent distribution per module. Use them individually or stack them dozens of times in series.</p>
+        </div>
+        <div class="effect-list" id="effect-list"></div>
+      </div>
+    </section>
+
+    <!-- Download Block -->
+    <section class="download-section section" id="download" aria-labelledby="download-title">
+      <div class="wrap">
+        <div class="download-heading">
+          <div>
+            <p class="eyebrow">FREE &amp; UNRESTRICTED</p>
+            <h2 id="download-title">Download Stacker v0.3.0</h2>
+          </div>
+          <p>No paywalls, account signups, or authorization bloatware. Includes all 22 modules, standalone host, and full modulation engine.</p>
+        </div>
+        <div class="download-table">
+          <article class="download-row">
+            <div class="platform-title"><h3>macOS</h3><p>Apple Silicon (arm64)</p></div>
+            <p class="platform-formats">VST3 · AU · CLAP · Standalone</p>
+            <div class="package-links">
+              <a class="download-button" href="https://github.com/sarendipitee/stacker/releases/latest/download/Stacker-macOS-arm64.pkg">Download PKG <span aria-hidden="true">↓</span></a>
+            </div>
+          </article>
+          <article class="download-row">
+            <div class="platform-title"><h3>Windows</h3><p>x64</p></div>
+            <p class="platform-formats">VST3 · CLAP · Standalone</p>
+            <div class="package-links">
+              <a class="package-extra" href="https://github.com/sarendipitee/stacker/releases/latest/download/Stacker-Windows-x86_64.zip">Portable ZIP</a>
+              <a class="download-button" href="https://github.com/sarendipitee/stacker/releases/latest/download/Stacker-Windows-x86_64.exe">Download EXE <span aria-hidden="true">↓</span></a>
+            </div>
+          </article>
+          <article class="download-row">
+            <div class="platform-title"><h3>Linux</h3><p>x64</p></div>
+            <p class="platform-formats">VST3 · CLAP · LV2 · Standalone</p>
+            <div class="package-links">
+              <a class="package-extra" href="https://github.com/sarendipitee/stacker/releases/latest/download/Stacker-Linux-x86_64.deb">DEB</a>
+              <a class="package-extra" href="https://github.com/sarendipitee/stacker/releases/latest/download/Stacker-Linux-x86_64.rpm">RPM</a>
+              <a class="download-button" href="https://github.com/sarendipitee/stacker/releases/latest/download/Stacker-Linux-x86_64.tar.gz">Download TAR.GZ <span aria-hidden="true">↓</span></a>
+            </div>
+          </article>
+        </div>
+        <div class="release-links">
+          <a href="https://github.com/sarendipitee/stacker/releases/latest">Release Notes ↗</a>
+          <a href="https://github.com/sarendipitee/stacker/releases/latest/download/SHA256SUMS.txt">SHA256 Checksums ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap">
+    <a class="brand" href="#" aria-label="Stacker home"><span class="wordmark">S T A C K E R</span></a>
+    <span>Free multi-effect audio plugin. Unrestricted donationware.</span>
+    <button class="atmosphere-toggle" id="atmosphere-toggle" aria-label="Pause background animation" aria-pressed="false" hidden>
+      <span aria-hidden="true">Ⅱ</span><span class="motion-label">LIVE ATMOSPHERE</span>
+    </button>
+  </footer>
+  <dialog id="image-dialog" aria-label="Expanded Stacker editor screenshot">
+    <button class="dialog-close" aria-label="Close expanded screenshot">Close <span aria-hidden="true">×</span></button>
+    <div class="dialog-image"><img id="expanded-image" src="assets/distribution-detail-3x.png" alt=""></div>
+  </dialog>
+</body>
+</html>

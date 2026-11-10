@@ -1,0 +1,18 @@
+{
+  "case": "distribution-editor-default",
+  "logical_size": [
+    1280,
+    800
+  ],
+  "pixel_size": [
+    3840,
+    2400
+  ],
+  "snapshot_scale": 3,
+  "renderer": "JUCE software component snapshot; offscreen",
+  "source_revision": "88b7012baec545606bc7bc4904975f209441de7a",
+  "source": "tests/ScreenshotCapture.cpp saveImage: snapshot scale 3; dimension check multiplied by 3; linked to existing build/release libraries",
+  "sha256": "5294900af5312247550baa4945dfabd54b7ed39aa99efdd87d07910d43dc370b",
+  "capture_binary_sha256": "fee8f80d5411ca67d24aec778ebdc9be60cd811dd4d6208d9be42b5598e4d227",
+  "note": "New current-editor capture; cutoff range differs from the historical 1x website screenshot. Native reference catalog untouched."
+}
